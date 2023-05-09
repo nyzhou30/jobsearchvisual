@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "DSAN Student Potential Job Analysis",
+    "section": "",
+    "text": "Overview\n\n\n\n\n\n\n\n\nDistribution of Job Search result over search location and job type, using histogram at left to filter search location\nThe analysis is based on a job search outcome focusing on DSAN study opportunities in Washington D.C. and across the United States. Both the DC region and the entire country exhibit remarkably similar distributions in terms of job types, despite minor variations in the time series aspect, particularly in relation to quantitative positions.\n\n\nWFH and Schedule Type\n\n\n\n\n\n\n\n\nDistribution of Work From Home Job and Job Schedule Type, using the left histogram to select ability to WFH\nAs the search result in 2023, there is a majority of jobs requiring candidates to be present onsite. Furthermore, the job search results predominantly consist of full-time positions, accompanied by a few contractor and internship opportunities. Notably, there are no WFH internships identified in this particular job search, indicating a likelihood that interns will need to be physically present at the worksite.\n\n\nJob Locations\n\n\n\n\n\n\n\nTop 10 states or regions for job locations, ‘Anywhere’ means WFH abilities,and USA means multiple location offered across the country\n\n\n\n\n\n\n\n\nTop 10 job locations among search in DC or USA, using select box to select search location\nWithin the United States, it is evident that New York and California offer the highest number of job opportunities. Additionally, the DMV region is also identified as a favorable location in terms of job prospects. With location near Georgetown and potential connection we could find in DSAN, jobs in DMW regions could be good targets for students.\n\n\nYear of Experience\n\n\n\n\n\n\n\n\nHistogram of minimum requirement of year of experience, job not listing YoE requirement is represented as 0 Based on the graph, it can be observed that a large proportion of job listings either do not have any minimum requirement for years of experience or have a relatively low requirement. This suggests that many of these jobs may be suitable for recent college graduates or individuals with limited work experience."
+  },
+  {
+    "objectID": "skill.html",
+    "href": "skill.html",
+    "title": "Skills Analysis",
+    "section": "",
+    "text": "Skills Correlation\n\n\n\n\n\n\n\n\n\nFurther Look: ARM\n\n\n\n\n\n\n\nFurther Look: Skills Tracing"
+  },
+  {
+    "objectID": "via.html",
+    "href": "via.html",
+    "title": "Job Site Analysis",
+    "section": "",
+    "text": "Job Sites Overview\n\n\n\n\n\n\n\n\nBased on the analysis, LinkedIn, ZipRecruiter, and Upwork emerge as the top three job sites with the highest number of opportunities. Additionally, other significant job sites include AngelList, Lever, and Greenhouse. I select top 5 job sites, with each of them having more than 20 results, for further studies.\n\n\nJob Type\n\n\n\n\n\n\n\n\nThe analysis indicates that LinkedIn and ZipRecruiter offer a balanced distribution of various types of jobs, while Upwork has a higher proportion of jobs related to neural networks and machine learning. On the other hand, Lever has a greater emphasis on data analytics positions. Additionally, LinkedIn and Upwork are the only two sites that feature some time-series jobs. As a result, ANLY 560 students may want to focus more on these two websites for job opportunities related to time-series analysis.\n\n\n\n\n\n\n\n\nGraph of Minimum YoE requirementin different job sites, using legend bar to select job site According to the analysis, LinkedIn and Lever offer more job opportunities that are suitable for experienced students, as they require a minimum number of years of experience. In contrast, Upwork has a higher proportion of job listings that do not require any prior experience, making it more suitable for new graduates."
+  }
+]

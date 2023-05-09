@@ -1,0 +1,33 @@
+project:
+  type: website
+
+website:
+  title: "website"
+  page-navigation: true
+  navbar:
+
+
+      left:
+      - text: "Overview"
+        href: index.qmd
+      - text: "Job Site Analysis"
+        href: via.qmd
+      - text: "Skill Analysis"
+        href: skills.qmd
+
+      right:
+      - icon: github
+        href: https://github.com/nyzhou30/jobsearchvisual
+        aria-label: GitHub
+
+
+format:
+  html:
+    theme: sandstone
+    css: styles.css
+    toc: true
+    embed-resources: true
+    self-contained: true
+    callout-appearance: simple
+    page-layout: article
+

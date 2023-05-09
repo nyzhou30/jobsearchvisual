@@ -1,0 +1,202 @@
+---
+title: "DSAN Student Potential Job Analysis"
+format:
+  html:
+    theme: sandstone
+    toc: true
+    embed-resources: true
+    self-contained: true
+    output-file: index.html
+execute: 
+  echo: False
+---
+
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+import plotly.express as px
+import plotly.io as pio
+pio.renderers.default = "plotly_mimetype+notebook_connected"
+import re
+import random
+import altair as alt
+```
+
+```{python}
+df_all = pd.read_csv('../data/all_job.csv')
+```
+
+```{python}
+df_all['Job Type'] = df_all['search'].apply(lambda text: re.sub(r'-\d+$', '', text).replace('-', ' ').title())
+df_all['Job Type'] = df_all['Job Type'].replace('Time Series Analysis', 'Time Series')
+```
+
+# Overview
+
+```{python}
+import warnings
+warnings.filterwarnings("ignore")
+
+selection = alt.selection_single(fields=['search_location'],name='Random')
+
+color = alt.condition(selection,
+                      alt.value('skyblue'),
+                      alt.value('lightgray'))
+
+bar = alt.Chart(df_all).mark_bar(size = 30).encode(
+    x = "search_location:N",
+    y='count(search_location):Q',
+    color = color,
+    tooltip=["search_location:N", "count(search_location):Q"]
+).properties(width = 200).add_selection(selection)
+
+bar.encoding.x.title = 'Search Location'
+bar.encoding.y.title = 'Coubt of result'
+bar.title = 'Result Distribution over Search Location'
+
+pie = alt.Chart(df_all).mark_arc(outerRadius=120).encode(
+    theta="count(Job Type):Q",
+    color=alt.Color('Job Type:N',scale=alt.Scale(scheme='spectral')),
+    tooltip=["Job Type:N", "count(Job Type):Q"]
+).transform_filter(selection)
+
+pie.title = 'Result Distribution over Job Types'
+
+
+bar | pie
+```
+
+<small>Distribution of Job Search result over search location and job type, using histogram at left to filter search location</small>
+
+The analysis is based on a job search outcome focusing on DSAN study opportunities in Washington D.C. and across the United States. Both the DC region and the entire country exhibit remarkably similar distributions in terms of job types, despite minor variations in the time series aspect, particularly in relation to quantitative positions.
+
+# WFH and Schedule Type
+```{python}
+selection = alt.selection_single(fields=['wfh'],name='Random')
+
+color = alt.condition(selection,
+                      alt.value('skyblue'),
+                      alt.value('lightgray'))
+
+bar1 = alt.Chart(df_all).mark_bar(size = 30).encode(
+    x = "wfh:N",
+    y='count(wfh):Q',
+    color = color,
+    tooltip=[alt.Tooltip("wfh:N", title="work from home"), "count(wfh):Q"]
+).properties(width = 200).add_selection(selection)
+
+bar1.encoding.x.title = 'Abel to Work From Home'
+bar1.encoding.y.title = 'Coubt of result'
+bar1.title = 'Work From Home'
+
+
+bar2 = alt.Chart(df_all[df_all['schedule_type'].notnull()]).mark_bar(size = 40).encode(
+    x = "schedule_type:N",
+    y='count(schedule_type):Q',
+    tooltip=["schedule_type:N", "count(schedule_type):Q"]
+).properties(width = 400).transform_filter(selection)
+
+bar2.encoding.x.title = 'Schedule Type'
+bar2.encoding.y.title = 'Coubt of result'
+bar2.title = 'Job Schedule Type'
+
+bar1 | bar2
+```
+<small>Distribution of Work From Home Job and Job Schedule Type, using the left histogram to select ability to WFH</small>
+
+As the search result in 2023, there is a majority of jobs requiring candidates to be present onsite. Furthermore, the job search results predominantly consist of full-time positions, accompanied by a few contractor and internship opportunities. Notably, there are no WFH internships identified in this particular job search, indicating a likelihood that interns will need to be physically present at the worksite.
+
+# Job Locations
+```{python}
+warnings.filterwarnings("ignore")
+
+top_10_state = df_all['location'].apply(lambda x: x.split(",")[-1]).value_counts().head(10).reset_index()
+top_10_state.columns = ['Value', 'Count']
+
+chart = alt.Chart(top_10_state).mark_bar().encode(
+    x=alt.X('Value',sort = '-y'),
+    y='Count',
+    tooltip=[alt.Tooltip("Value:N", title="State(Region)"), "Count"],
+    color = alt.value('skyblue')
+)
+
+chart = chart.properties(
+    width=600,
+    title='Top 10 Counts of Values in Column'
+)
+
+chart.title = 'Top 10 State(Region) among All Job Search'
+chart.encoding.x.title = 'State (Region)'
+chart
+```
+<small>Top 10 states or regions for job locations, 'Anywhere' means WFH abilities,and USA means multiple location offered across the country</small>
+
+```{python}
+select_box = alt.binding_select(options=['DC', 'USA'], name = "Search Location ")
+location_selection = alt.selection_single(name='Random', fields=['search_location'], bind=select_box)
+
+
+bar = alt.Chart(df_all).add_selection(location_selection).transform_filter(location_selection).transform_aggregate(
+    count='count()',
+    groupby=['location']
+).transform_window(
+    rank='rank(count)',
+    sort=[alt.SortField('count', order='descending')]
+).transform_filter(
+    alt.datum.rank <= 10
+).mark_bar(size = 30).encode(
+    x='count:Q',
+    y=alt.Y('location:N', sort='-x'),
+    tooltip=['location:N', 'count:Q'],
+    color = alt.value('skyblue')
+
+).properties(
+    title='Top 10 Most Job Locations by Cities(Region)',
+    width=600,
+    height=400)
+
+bar
+```
+<small>Top 10 job locations among search in DC or USA, using select box to select search location</small>
+
+Within the United States, it is evident that New York and California offer the highest number of job opportunities. Additionally, the DMV region is also identified as a favorable location in terms of job prospects. With location near Georgetown and potential connection we could find in DSAN, jobs in DMW regions could be good targets for students.
+
+```{python}
+def extract_years_of_experience(qualification):
+    pattern = r'(\d+)\+?\s*(?:years|years of|\(.*?\)\s*years)'
+    matches = re.findall(pattern, qualification, re.IGNORECASE)
+    if matches:
+        return min([int(match) for match in matches])
+    else:
+        return np.nan
+
+df_all['Min YoE'] = df_all['Qualifications'].apply(lambda x: extract_years_of_experience(x))
+df_all['Min YoE'] = df_all['Min YoE'].fillna(0)
+```
+
+# Year of Experience
+```{python}
+
+warnings.filterwarnings("ignore")
+histogram = alt.Chart(df_all).mark_bar().encode(
+    x=alt.X('Min YoE:O'),
+    y='count()',
+    tooltip=['Min YoE:O', 'count()'],
+    color = alt.value('skyblue')
+).properties(
+    title='Histogram of Years with NAs at the Left',
+    width=600
+)
+
+histogram.title = "Minim Requirement of Year of Experience"
+histogram.encoding.y.title = 'count'
+histogram.encoding.x.title = 'Year of Experience'
+
+histogram
+```
+
+<small>Histogram of minimum requirement of year of experience, job not listing YoE requirement is represented as 0</small>
+Based on the graph, it can be observed that a large proportion of job listings either do not have any minimum requirement for years of experience or have a relatively low requirement. This suggests that many of these jobs may be suitable for recent college graduates or individuals with limited work experience.
+

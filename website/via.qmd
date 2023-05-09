@@ -1,0 +1,153 @@
+---
+title: "Job Site Analysis"
+format:
+  html:
+    theme: sandstone
+    toc: true
+    embed-resources: true
+    self-contained: true
+    output-file: via.html
+execute: 
+  echo: False
+---
+
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+import plotly.express as px
+import plotly.io as pio
+pio.renderers.default = "plotly_mimetype+notebook_connected"
+import re
+import random
+import altair as alt
+```
+
+```{python}
+df_all = pd.read_csv('../data/all_job.csv')
+```
+
+```{python}
+df_all['Job Type'] = df_all['search'].apply(lambda text: re.sub(r'-\d+$', '', text).replace('-', ' ').title())
+df_all['Job Type'] = df_all['Job Type'].replace('Time Series Analysis', 'Time Series')
+
+def extract_years_of_experience(qualification):
+    pattern = r'(\d+)\+?\s*(?:years|years of|\(.*?\)\s*years)'
+    matches = re.findall(pattern, qualification, re.IGNORECASE)
+    if matches:
+        return min([int(match) for match in matches])
+    else:
+        return np.nan
+
+df_all['Min YoE'] = df_all['Qualifications'].apply(lambda x: extract_years_of_experience(x))
+df_all['Min YoE'] = df_all['Min YoE'].fillna(0)
+```
+
+```{python}
+df_all['via'] = df_all['via'].str.replace('via ', '')
+```
+# Job Sites Overview
+```{python}
+import warnings
+warnings.filterwarnings("ignore")
+
+bar = alt.Chart(df_all).transform_aggregate(
+    count='count()',
+    groupby=['via']
+).transform_window(
+    rank='rank(count)',
+    sort=[alt.SortField('count', order='descending')]
+).transform_filter(
+    alt.datum.rank <= 20
+).mark_bar(size = 30).encode(
+    y='count:Q',
+    x=alt.X('via:N', sort='-y'),
+    tooltip=['via:N', 'count:Q'],
+    color = alt.value('skyblue')
+
+).properties(
+    title='Top 20 Job Sites',
+    width=600,
+    height=400)
+
+bar.encoding.x.title = "Job Sites"
+bar
+```
+
+Based on the analysis, LinkedIn, ZipRecruiter, and Upwork emerge as the top three job sites with the highest number of opportunities. Additionally, other significant job sites include AngelList, Lever, and Greenhouse. I select top 5 job sites, with each of them having more than 20 results, for further studies.
+
+# Job Type
+```{python}
+
+warnings.filterwarnings("ignore")
+
+top_5_list = df_all['via'].value_counts().head(5).index.tolist()
+
+bar = alt.Chart(df_all[df_all["via"].isin(top_5_list)]).transform_aggregate(
+    count='count()',
+    groupby=['Job Type', 'via']
+).transform_joinaggregate(
+    total='sum(count)',
+    groupby=['via']  
+).transform_calculate(
+    frac=alt.datum.count / alt.datum.total
+).mark_bar(size = 50).encode(
+    x=alt.X("via:O", sort = ('-y')),
+    y=alt.Y('count:Q', stack="normalize", axis=alt.Axis(title="Percent", format="%")),
+    color=alt.Color('Job Type:N',scale=alt.Scale(scheme='spectral')),
+    tooltip=[
+        'Job Type:N',
+        alt.Tooltip('count:Q', title="Total Job Result"),
+        alt.Tooltip('frac:Q', title="Percentage within the Job Site", format='.0%')]
+).properties(
+    title='Job Type in Top Five Job Sites',
+    width=600,
+    height=400)
+
+bar.encoding.x.title = 'Job Sites'
+bar
+```
+
+The analysis indicates that LinkedIn and ZipRecruiter offer a balanced distribution of various types of jobs, while Upwork has a higher proportion of jobs related to neural networks and machine learning. On the other hand, Lever has a greater emphasis on data analytics positions. Additionally, LinkedIn and Upwork are the only two sites that feature some time-series jobs. As a result, ANLY 560 students may want to focus more on these two websites for job opportunities related to time-series analysis.
+
+```{python}
+
+
+selection = alt.selection_multi(fields=['via'], bind='legend')
+
+boxplot = alt.Chart(df_all[df_all["via"].isin(top_5_list)]).mark_boxplot(size = 50).encode(
+    x=alt.X("via:N"),
+    y='Min YoE:Q',
+    color = alt.condition(selection, alt.Color('via:N', scale=alt.Scale(scheme='spectral')), alt.value('lightgray'))
+).properties(
+    width=200,
+    height=400
+)
+
+
+histogram = alt.Chart(df_all[df_all["via"].isin(top_5_list)]).mark_bar(
+    binSpacing=0,
+).encode(
+    alt.X('Min YoE:O'),
+    alt.Y('count()', stack=None),
+    color=alt.Color('via:N'),
+    opacity=alt.condition(selection, alt.value(1), alt.value(0.1))
+).add_selection(selection).properties(
+    width=300,
+    height=400
+)
+
+histogram.encoding.x.title = 'Year of Experience'
+boxplot.encoding.x.title = 'Job Sites'
+
+plot = (histogram | boxplot)
+plot.title = "Minim Year of Experience Requirement in Different Job Sites (Top 5)"
+histogram.encoding.color.title = 'Job Sites'
+
+plot
+```
+<small>Graph of Minimum YoE requirementin different job sites, using legend bar to select job site</small>
+According to the analysis, LinkedIn and Lever offer more job opportunities that are suitable for experienced students, as they require a minimum number of years of experience. In contrast, Upwork has a higher proportion of job listings that do not require any prior experience, making it more suitable for new graduates.
+
+
