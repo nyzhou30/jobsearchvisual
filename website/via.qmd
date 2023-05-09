@@ -2,7 +2,6 @@
 title: "Job Site Analysis"
 format:
   html:
-    theme: sandstone
     toc: true
     embed-resources: true
     self-contained: true
@@ -60,7 +59,7 @@ bar = alt.Chart(df_all).transform_aggregate(
     sort=[alt.SortField('count', order='descending')]
 ).transform_filter(
     alt.datum.rank <= 20
-).mark_bar(size = 30).encode(
+).mark_bar(size = 20).encode(
     y='count:Q',
     x=alt.X('via:N', sort='-y'),
     tooltip=['via:N', 'count:Q'],
@@ -116,7 +115,7 @@ The analysis indicates that LinkedIn and ZipRecruiter offer a balanced distribut
 
 selection = alt.selection_multi(fields=['via'], bind='legend')
 
-boxplot = alt.Chart(df_all[df_all["via"].isin(top_5_list)]).mark_boxplot(size = 50).encode(
+boxplot = alt.Chart(df_all[df_all["via"].isin(top_5_list)]).mark_boxplot(size = 30).encode(
     x=alt.X("via:N"),
     y='Min YoE:Q',
     color = alt.condition(selection, alt.Color('via:N', scale=alt.Scale(scheme='spectral')), alt.value('lightgray'))

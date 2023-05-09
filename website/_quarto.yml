@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "website"
+  title: "DSAN Student Pontential Job Analysis"
   page-navigation: true
   navbar:
 
@@ -23,7 +23,7 @@ website:
 
 format:
   html:
-    theme: sandstone
+    theme: minty
     css: styles.css
     toc: true
     embed-resources: true

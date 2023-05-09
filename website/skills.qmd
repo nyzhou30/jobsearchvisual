@@ -2,7 +2,6 @@
 title: "Skills Analysis"
 format:
   html:
-    theme: sandstone
     toc: true
     embed-resources: true
     self-contained: true
