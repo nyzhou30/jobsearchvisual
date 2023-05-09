@@ -59,11 +59,12 @@ for keyword in keywords:
     else:
         df_all[keyword] = np.where(df_all['Qualifications_processed'].str.contains(preprocess(keyword), case=False), True, False)
 ```
+By selecting the common 10 skills offered in DSAN classes and searching for them in job qualifications, we can observe the relevance and requirement of these skills across different job positions. The results provide valuable insights into how these skills are sought after in various job roles within the job market. This information can be helpful in understanding the demand for these skills and tailoring one's skillset accordingly to align with the job requirements.
 
 ```{python}
 df = df_all[keywords]
 ```
-# Skills Correlation
+## Skills Correlation
 ```{python}
 import warnings
 warnings.filterwarnings("ignore")
@@ -91,8 +92,9 @@ heatmap = alt.Chart(df_counts).mark_rect().encode(
 
 heatmap
 ```
+Based on the heatmap, it appears that Python is highly correlated with other skills in the job qualifications. This suggests that Python is a key skill that is commonly used in conjunction with other skills in various data science-related fields. The proficiency in Python is essential for performing tasks and analyses in data science. 
 
-# Further Look: ARM
+## Further Look: ARM
 ```{python}
 from apyori import apriori
 import networkx as nx
@@ -188,6 +190,7 @@ def plot_network(G):
     plt.show()
 ```
 
+
 ```{python}
 results = list(apriori(transactions, min_support = 0.05, min_confidence = 0.05, min_length = 1, max_length = 5))
 results_reforated = reformat_results(results)
@@ -195,7 +198,9 @@ results_net = convert_to_network(results_reforated)
 plot_network(results_net)
 ```
 
-# Further Look: Skills Tracing
+I then conducted association rule mining to explore the skills required in jobs, the resulting plot revealed interesting insights: Notably, Python emerged as a highly interconnected skill, indicating its significant importance across various job domains. Moreover, SQL appeared to have connections with multiple fields and tools, suggesting that students interested in big data or data visualization could benefit from adding SQL to their skill set. Additionally, NLP, Deep Learning, and Optimization exhibited strong associations, indicating that students pursuing machine learning jobs could consider taking these three electives together.
+
+## Further Look: Skills Tracing
 ```{python}
 import plotly.graph_objects as go
 import plotly.colors
@@ -239,8 +244,9 @@ fig = go.Figure(data=[
 
 
 
-fig.update_layout(height=500, width=1200)
+fig.update_layout(height=500, width=1000)
 fig.update_layout(title = "Parallel Flow Analysis from Skills To Job Type")
 fig.show()
 ```
 
+The final graph visualizes the relationship between different skills and job types, showing how 10 specific skills are required for each job type. The lines on the graph trace the skill requirements for each job type, with Data Science and Deep Learning jobs requiring a broad range of skills, student need to learn almost all skills to fit the qualifications. In contrast, for Time Series or Blockchain jobs, students could focus on fewer skills and explore them in more depth.

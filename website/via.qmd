@@ -47,7 +47,7 @@ df_all['Min YoE'] = df_all['Min YoE'].fillna(0)
 ```{python}
 df_all['via'] = df_all['via'].str.replace('via ', '')
 ```
-# Job Sites Overview
+## Job Sites Overview
 ```{python}
 import warnings
 warnings.filterwarnings("ignore")
@@ -77,7 +77,7 @@ bar
 
 Based on the analysis, LinkedIn, ZipRecruiter, and Upwork emerge as the top three job sites with the highest number of opportunities. Additionally, other significant job sites include AngelList, Lever, and Greenhouse. I select top 5 job sites, with each of them having more than 20 results, for further studies.
 
-# Job Type
+## Job Type
 ```{python}
 
 warnings.filterwarnings("ignore")
@@ -148,6 +148,7 @@ histogram.encoding.color.title = 'Job Sites'
 plot
 ```
 <small>Graph of Minimum YoE requirementin different job sites, using legend bar to select job site</small>
+
 According to the analysis, LinkedIn and Lever offer more job opportunities that are suitable for experienced students, as they require a minimum number of years of experience. In contrast, Upwork has a higher proportion of job listings that do not require any prior experience, making it more suitable for new graduates.
 
 
