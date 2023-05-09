@@ -84,8 +84,8 @@ heatmap = alt.Chart(df_counts).mark_rect().encode(
     color=alt.Color('count:Q', scale=alt.Scale(scheme='bluepurple')),
     tooltip=["x:O", "y:O", 'count:Q']
 ).properties(
-    width=600,
-    height=600,
+    width=400,
+    height=400,
     title='Heatmap of Skills Occurrences in Job Qualification'
 )
 
@@ -197,7 +197,7 @@ results_net = convert_to_network(results_reforated)
 plot_network(results_net)
 ```
 
-I then conducted association rule mining to explore the skills required in jobs, the resulting plot revealed interesting insights: Notably, Python emerged as a highly interconnected skill, indicating its significant importance across various job domains. Moreover, SQL appeared to have connections with multiple fields and tools, suggesting that students interested in big data or data visualization could benefit from adding SQL to their skill set. Additionally, NLP, Deep Learning, and Optimization exhibited strong associations, indicating that students pursuing machine learning jobs could consider taking these three electives together.
+I then conducted association rule mining to explore the skills required in jobs, the resulting plot reveals interesting insights: Notably, Python emerged as a highly interconnected skill, indicating its significant importance across various job domains. Moreover, SQL appeared to have connections with multiple fields and tools, suggesting that students interested in big data or data visualization could benefit from adding SQL to their skill set. Additionally, NLP, Deep Learning, and Optimization exhibited strong associations, indicating that students pursuing machine learning jobs could consider taking these three electives together.
 
 ## Further Look: Skills Tracing
 ```{python}
@@ -244,7 +244,7 @@ fig = go.Figure(data=[
 
 
 fig.update_layout(height=500, width=1000)
-fig.update_layout(title = "Parallel Flow Analysis from Skills To Job Type")
+fig.update_layout(title = "Parallel Tracing Analysis from Skills To Job Type")
 fig.show()
 ```
 

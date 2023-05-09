@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "DSAN Student Potential Job Analysis",
     "section": "",
-    "text": "Distribution of Job Search result over search location and job type, using histogram at left to filter search location\nThe analysis is based on a job search outcome focusing on DSAN study opportunities in Washington D.C. and across the United States. Both the DC region and the entire country exhibit remarkably similar distributions in terms of job types, despite minor variations in the time series aspect, particularly in relation to quantitative positions."
+    "text": "Distribution of Job Search result over search location and job type, using histogram at left to filter search location\nThe analysis is based on a job search outcome focusing on DSAN study opportunities in Washington D.C. and across the United States. Both the DC region and the entire country exhibit remarkably similar distributions in terms of job types, despite minor variations in the time series aspect, particularly in relation to quant positions."
   },
   {
     "objectID": "index.html#wfh-and-schedule-type",
@@ -25,7 +25,7 @@
     "href": "index.html#year-of-experience",
     "title": "DSAN Student Potential Job Analysis",
     "section": "Year of Experience",
-    "text": "Year of Experience\n\n\n\n\n\n\n\n\nHistogram of minimum requirement of year of experience, job not listing YoE requirement is represented as 0\nBased on the graph, it can be observed that a large proportion of job listings either do not have any minimum requirement for years of experience or have a relatively low requirement. This suggests that many of these jobs may be suitable for recent college graduates or individuals with limited work experience."
+    "text": "Year of Experience\n\n\n\n\n\n\n\n\nHistogram of minimum requirement of year of experience, job not listing YoE requirement is represented as 0\nBased on the graph, it can be observed that a large proportion of job listings either do not have any minimum requirement for years of experience or have a relatively low requirement. This suggests that many of these jobs may be suitable for new graduates or students with limited work experience."
   },
   {
     "objectID": "skill.html",
@@ -46,7 +46,7 @@
     "href": "skill.html#further-look-arm",
     "title": "Skills Analysis",
     "section": "Further Look: ARM",
-    "text": "Further Look: ARM\n\n\n\n\n\nI then conducted association rule mining to explore the skills required in jobs, the resulting plot revealed interesting insights: Notably, Python emerged as a highly interconnected skill, indicating its significant importance across various job domains. Moreover, SQL appeared to have connections with multiple fields and tools, suggesting that students interested in big data or data visualization could benefit from adding SQL to their skill set. Additionally, NLP, Deep Learning, and Optimization exhibited strong associations, indicating that students pursuing machine learning jobs could consider taking these three electives together."
+    "text": "Further Look: ARM\n\n\n\n\n\nI then conducted association rule mining to explore the skills required in jobs, the resulting plot reveals interesting insights: Notably, Python emerged as a highly interconnected skill, indicating its significant importance across various job domains. Moreover, SQL appeared to have connections with multiple fields and tools, suggesting that students interested in big data or data visualization could benefit from adding SQL to their skill set. Additionally, NLP, Deep Learning, and Optimization exhibited strong associations, indicating that students pursuing machine learning jobs could consider taking these three electives together."
   },
   {
     "objectID": "skill.html#further-look-skills-tracing",
@@ -67,6 +67,13 @@
     "href": "via.html#job-type",
     "title": "Job Site Analysis",
     "section": "Job Type",
-    "text": "Job Type\n\n\n\n\n\n\n\n\nThe analysis indicates that LinkedIn and ZipRecruiter offer a balanced distribution of various types of jobs, while Upwork has a higher proportion of jobs related to neural networks and machine learning. On the other hand, Lever has a greater emphasis on data analytics positions. Additionally, LinkedIn and Upwork are the only two sites that feature some time-series jobs. As a result, ANLY 560 students may want to focus more on these two websites for job opportunities related to time-series analysis.\n\n\n\n\n\n\n\n\nGraph of Minimum YoE requirementin different job sites, using legend bar to select job site\nAccording to the analysis, LinkedIn and Lever offer more job opportunities that are suitable for experienced students, as they require a minimum number of years of experience. In contrast, Upwork has a higher proportion of job listings that do not require any prior experience, making it more suitable for new graduates."
+    "text": "Job Type\n\n\n\n\n\n\n\n\nThe analysis indicates that LinkedIn and ZipRecruiter offer a balanced distribution of various types of jobs, while Upwork has a higher proportion of jobs related to neural networks and machine learning. On the other hand, Lever has a greater emphasis on data analytics positions. Additionally, LinkedIn and Upwork are the only two sites that feature some time-series jobs. As a result, ANLY-560 students may want to focus more on these two websites for job opportunities related to time-series analysis."
+  },
+  {
+    "objectID": "via.html#year-of-experience",
+    "href": "via.html#year-of-experience",
+    "title": "Job Site Analysis",
+    "section": "Year of Experience",
+    "text": "Year of Experience\n\n\n\n\n\n\n\n\nGraph of Minimum YoE requirementin different job sites, using legend bar to select job site\nAccording to the analysis, LinkedIn and Lever offer more job opportunities that are suitable for experienced students, as they require a minimum number of years of experience. In contrast, Upwork has a higher proportion of job listings that do not require any prior experience, making it more suitable for new graduates."
   }
 ]

@@ -2,8 +2,8 @@ project:
   type: website
 
 website:
-  title: "DSAN Student Pontential Job Analysis"
   page-navigation: true
+  title: "DSAN Student Potential Job Analysis"
   navbar:
 
 
@@ -12,7 +12,7 @@ website:
         href: index.qmd
       - text: "Job Site Analysis"
         href: via.qmd
-      - text: "Skill Analysis"
+      - text: "Skills Analysis"
         href: skills.qmd
 
       right:

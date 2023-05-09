@@ -108,8 +108,9 @@ bar.encoding.x.title = 'Job Sites'
 bar
 ```
 
-The analysis indicates that LinkedIn and ZipRecruiter offer a balanced distribution of various types of jobs, while Upwork has a higher proportion of jobs related to neural networks and machine learning. On the other hand, Lever has a greater emphasis on data analytics positions. Additionally, LinkedIn and Upwork are the only two sites that feature some time-series jobs. As a result, ANLY 560 students may want to focus more on these two websites for job opportunities related to time-series analysis.
+The analysis indicates that LinkedIn and ZipRecruiter offer a balanced distribution of various types of jobs, while Upwork has a higher proportion of jobs related to neural networks and machine learning. On the other hand, Lever has a greater emphasis on data analytics positions. Additionally, LinkedIn and Upwork are the only two sites that feature some time-series jobs. As a result, ANLY-560 students may want to focus more on these two websites for job opportunities related to time-series analysis.
 
+## Year of Experience
 ```{python}
 
 

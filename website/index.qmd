@@ -69,7 +69,7 @@ bar | pie
 
 <small>Distribution of Job Search result over search location and job type, using histogram at left to filter search location</small>
 
-The analysis is based on a job search outcome focusing on DSAN study opportunities in Washington D.C. and across the United States. Both the DC region and the entire country exhibit remarkably similar distributions in terms of job types, despite minor variations in the time series aspect, particularly in relation to quantitative positions.
+The analysis is based on a job search outcome focusing on DSAN study opportunities in Washington D.C. and across the United States. Both the DC region and the entire country exhibit remarkably similar distributions in terms of job types, despite minor variations in the time series aspect, particularly in relation to quant positions.
 
 ## WFH and Schedule Type
 ```{python}
@@ -198,5 +198,5 @@ histogram
 
 <small>Histogram of minimum requirement of year of experience, job not listing YoE requirement is represented as 0</small>
 
-Based on the graph, it can be observed that a large proportion of job listings either do not have any minimum requirement for years of experience or have a relatively low requirement. This suggests that many of these jobs may be suitable for recent college graduates or individuals with limited work experience.
+Based on the graph, it can be observed that a large proportion of job listings either do not have any minimum requirement for years of experience or have a relatively low requirement. This suggests that many of these jobs may be suitable for new graduates or students with limited work experience.
 
